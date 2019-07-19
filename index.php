@@ -7,6 +7,11 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
         <title>Sistema de Login TNX Systems</title>
+        <style>
+            #caixaCadastro, #caixaRecuperarSenha, #alerta{
+                display: none;
+            }
+        </style>
     </head>
 <body class="bg-dark">
     <main class="container mt-4"> 
@@ -37,7 +42,7 @@
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" name="lembra" id="lembrar" class="custom-control-input">
                         <label for="lembrar" class=custom-control-label> Lembrar de Mim </label>
-                            <a href="#" id="btnEsquci" class="float-right" >Esqueceu a Senha?</a>
+                            <a href="#" id="btnEsqueci" class="float-right" >Esqueceu a Senha?</a>
                     </div>
                  </div>
 
@@ -104,10 +109,66 @@
         
         </section>
 
+        <!-- Formulário de recuperação de senha -->
+        <section class="row mb-5">
+            <div class="col-lg-4 offset-lg-4 bg-light rounded" id="caixaRecuperarSenha">
+                <h2 class="text-center">Gerar nova Senha</h2>
+                <form action="#" id="formSenha">
+
+                    <div class="form-group">
+                        <small class="text-muted">
+                            Para gerar uma nova senha, digite seu e-mail e receba as instruções.
+                        </small>                       
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" name="emailSenha" id="emailSenha" class="form-control" placeholder="E-mail" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value=":: Enviar e-mail ::" id="btnEnviarEmail" class="btn btn-primary btn-block">
+                    </div>
+
+                    <div class="form-group float-right">
+                        <a href="#"id="btnVoltar">Voltar</a>
+                    </div>
+                </form>
+            </div>
+        </section>
+
     </main>  
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+    // jQuery
+    $(function(){
+        $("#btnEsqueci").click(function(){
+            //Trocar da tela de login para recuperar senha
+            $("#caixaLogin").hide();
+            $("#caixaRecuperarSenha").show();
+        });
+
+        $("#btnVoltar").click(function(){
+            //Volltar para a tela de login
+            $("#caixaLogin").show();
+            $("#caixaRecuperarSenha").hide();
+        });
+
+        // Trocar tela de login para a de cadastrar
+        $("#btnCadastrar").click(function(){
+            $("#caixaCadastro").show();
+            $("#caixaLogin").hide();
+        });
+
+        // Voltar para a tela de login
+        $("#btnJáCadastrado").click(function(){
+            $("#caixaCadastro").hide(); // Ocultar
+            $("#caixaLogin").show(); // Mostrar
+        })
+
+    });
+</script>
 </body>
 </html>
