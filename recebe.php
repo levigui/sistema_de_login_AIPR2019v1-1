@@ -25,20 +25,33 @@ if(isset($_POST['action']) && $_POST['action'] == 'cadastro'){
         $senha = sha1($senhaUsuario);
         $senhaC = sha1($senhaConfirma);
         
-        echo "<h5>Nome Completo: $nomeCompleto</h5>";
-        echo "<h5>Nome Usuario: $nomeUsuario</h5>";
-        echo "<h5>E-mail Usuario: $emailUsuario</h5>";
-        echo "<h5>Senha Usuario: $senhaUsuario</h5>";
-        echo "<h5>Senha Confirma: $senhaConfirma</h5>";
-        echo "<h5>Concordar: $concordar</h5>";
-        echo "<h5>Data: $dataCriacao</h5>";
-
         if($senha != $senhaC){
             echo "<h1> As senha nao conferem</h1>";
             exit();
         }else{
-            echo "<h5>senha codificada: $senha</h5>";
+            // echo "<h5>senha codificada: $senha</h5>";
+            // Verificar se o usuário ja existe no banco de dados
+            $sql = $conecta->prepare("SELECT nomeUsuario, email FROM usuario WHERE nomeUsuario = ? OR email = ?");
+            //Substitui cada ? por uma string abaixo
+            $sql->bind_param("ss",$nomeUsuario, $emailUsuario);
+            $sql->execute();
+            $resultado = $sql->get_result();
+            $linha = $resultado->fetch_array(MYSQLI_ASSOC);
+             if($linha['nomeUsuario'] == $nomeUsuario){
+                 echo "<p> Nome de usuário indisponível, tente outro</p>";
+             }elseif($linha['email'] == $emailUsuario){
+                 echo "<p> Email ja em uso, tente outro</p>";
+             }else{//Cadastro de usuário
+                $sql = $conecta->prepare("INSERT into usuario(nome, nomeUsuario, email, senha, dataCriacao) values(?, ?, ?, ?, ?)");
+                $sql->bind_param("sssss", $nomeCompleto, $nomeUsuario, $emailUsuario, $senha, $dataCriacao);
+                if($sql->execute()){
+                    echo "<p>Registrado com sucesso</p>";
+                }else{
+                    echo "<p>Algo deu errado. Tente outra vez</p>";
+                }
+            }
         }
+
 
 } else{
 echo "<h1 style = 'color:tomato'> Esta Pagina Não Pode ser acessada Diretamente</h2>";
