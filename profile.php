@@ -48,12 +48,23 @@ require_once 'session.php';
         </div>
     </nav>
 
-    <main class="container mt-4">
-        <h1 class="text-light">Perfil de usuário</h1>
-        <h2 class="text-light">Nome: <?= $nome ?> </h2>
-        <h2 class="text-light">E-mail: <?= $email ?> </h2>
-        <h2 class="text-light">Data de Cadastro <?= $dataCriacao ?> </h2>
-    </main>
+    <div class="container">
+        <div class="row">
+        
+            <div class="col-9">
+                <h1 class="text-light mb-5 mt-4">Perfil do <?= $nome ?></h1>
+            </div>
+            <div class="col-4"> <img src="<?= $imagem ?>" alt="Ícone" width="200" height="200"></div>
+
+            <div class="col-6">
+                <h2 class="text-light">Nome: <?= $nome ?></h2>
+                <h2 class="text-light">E-mail: <?= $email ?></h2>
+                <h2 class="text-light">Data de Cadastro: <?= date('d/m/Y H:i:s', strtotime($dataCriacao)) ?></h2>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
