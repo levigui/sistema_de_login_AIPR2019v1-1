@@ -26,7 +26,7 @@ require_once 'session.php';
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="profile.php">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="profile.php">Perfil <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="">link 1</a>
